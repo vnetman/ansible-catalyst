@@ -50,3 +50,44 @@ and then goes on to apply `service-policy output pm_default_shape` on all the la
 ## The `csrange` lookup filter
 
 The Jinja2 templates make use of the `csrange` Ansible filter written by me, and available on [github here](https://github.com/vnetman/ansible-csrange-lookup). I am working towards making it available on Ansible Galaxy, but I am not there yet.
+
+## Files in this repository
+
+```
+.
+├── LICENSE
+├── pb-dist-switches.yml
+├── README.md
+└── roles
+    └── distribution_switches
+        ├── tasks
+        │   ├── 01-device.yml
+        │   ├── 02-logging.yml
+        │   ├── 03-aaa.yml
+        │   ├── 04-user-interface.yml
+        │   ├── 05-layer-2.yml
+        │   ├── 06-layer-3.yml
+        │   ├── 07-netflow.yml
+        │   ├── 08-qos.yml
+        │   └── main.yml
+        ├── templates
+        │   ├── aaa_configurations.j2
+        │   ├── device_configurations.j2
+        │   ├── layer_2_configurations.j2
+        │   ├── layer_3_configurations.j2
+        │   ├── logging_configurations.j2
+        │   ├── netflow_configurations.j2
+        │   ├── qos_configurations.j2
+        │   └── user_interface_configurations.j2
+        └── vars
+            ├── 01-device-vars.yml
+            ├── 03-aaa-vars.yml
+            ├── 04-user-interface-vars.yml
+            ├── 05-layer-2-vars.yml
+            ├── 06-layer-3-vars.yml
+            ├── 08-qos-vars.yml
+            ├── main.yml
+            └── secrets.yml
+
+5 directories, 28 files
+```
