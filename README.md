@@ -47,9 +47,9 @@ policy-map pm_default_shape
 
 and then goes on to apply `service-policy output pm_default_shape` on all the layer 2 switchports (which are in turn defined and identified in a different YAML file).
 
-## The `csrange` lookup filter
+## The `csrange` lookup plugin
 
-The Jinja2 templates make use of the `csrange` Ansible filter written by me, and available on [github here](https://github.com/vnetman/ansible-csrange-lookup). I am working towards making it available on Ansible Galaxy, but I am not there yet. In the meanwhile, you can create a subdirectory named `lookup_plugins` under the directory where your main playbook is located, and copy the `csrange.py` from the github repository into that subdirectory.
+The Jinja2 templates make extensive use of the `csrange` Ansible plugin written by me, and available on [github here](https://github.com/vnetman/ansible-csrange-lookup). I am working towards making the plugin available on Ansible Galaxy, but I am not there yet. In the meanwhile, you can create a subdirectory named `lookup_plugins` under the directory where your main playbook is located, and copy the `csrange.py` from the github repository into that subdirectory.
 
 ## Files in this repository
 
