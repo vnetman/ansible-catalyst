@@ -1,0 +1,9 @@
+---
+- include_vars:
+    file: '05-layer-2-vars.yml'
+
+- name: Layer 2 configurations
+  template: src=layer_2_configurations.j2 dest={{ cfg_dest }}
+  with_items:
+    "{{ devices }}"
+    

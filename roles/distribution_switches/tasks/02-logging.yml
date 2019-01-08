@@ -1,0 +1,6 @@
+---
+- name: logging configurations
+  template: src=logging_configurations.j2 dest={{ cfg_dest }}
+  with_items:
+    "{{ devices }}"
+    

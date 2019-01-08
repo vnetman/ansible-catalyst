@@ -1,0 +1,60 @@
+#jinja2:lstrip_blocks: True
+
+flow record ipsrc
+ match ipv4 source address
+
+{% for mp_sel in microflow_policer %}
+ip access-list extended uflow_police_{{ mp_sel.category.name }}
+  {% for vlan_id in lookup('csrange', mp_sel.category.vlans, wantlist=True) %}
+ permit ip {{ svis.ipv4_high_16 }}{{ vlan_id }}.0 {{ svis.ipv4_network_wc }} any
+  {% endfor %}
+!
+{% endfor %}
+{% for mp_sel in microflow_policer %}
+class-map match-any uflow_police_{{ mp_sel.category.name }}
+ match access-group name uflow_police_{{ mp_sel.category.name }}
+ match flow record ipsrc
+!  
+{% endfor %}
+policy-map uflow_police_policy
+{% for mp_sel in microflow_policer %}
+ class uflow_police_{{ mp_sel.category.name }}
+  police cir {{ mp_sel.category.per_flow_rate_bps }}
+   conform-action transmit
+   exceed-action drop
+ !
+{% endfor %}
+!
+{% for l2ifq_sel in l2_interface_queueing %}
+  {% if l2ifq_sel.category.name != 'default' %}
+class-map match-any {{ l2ifq_sel.category.name }}
+    {% if 'ip_precedence' in l2ifq_sel.category %}
+      {% for ipp_val in lookup('csrange', l2ifq_sel.category.ip_precedence, wantlist=True) %}
+ match ip precedence {{ ipp_val }}
+      {% endfor %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+!
+policy-map pm_default_shape
+{% for l2ifq_sel in l2_interface_queueing %}
+  {% if l2ifq_sel.category.name == 'default' %}
+ class class-default
+  {% else %}
+ class {{ l2ifq_sel.category.name }}
+  {% endif %}
+  {{ l2ifq_sel.category.queue_action }}
+{% endfor %}
+!
+{% for l2pc_sel in  l2_port_channels %}
+  {% if l2pc_sel.hostname == item.hostname %}
+    {% for ch_sel in l2pc_sel.channels %}
+      {% for l2_intf in lookup('csrange', ch_sel.members, wantlist=True) %}
+interface {{ l2_intf }}
+ service-policy input uflow_police_policy
+ service-policy output pm_default_shape
+!	
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}

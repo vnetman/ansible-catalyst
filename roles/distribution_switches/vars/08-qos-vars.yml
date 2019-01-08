@@ -1,0 +1,46 @@
+---
+microflow_policer:
+  # The intention here is that we divide the client vlan range 3-250 into three
+  # categories named "standard", "visitors" and "research". Flows to/from these
+  # vlans are policed at different rates. See the Jinja2 template to see how
+  # this "intention" maps to Cisco IOS CLI commands (access-lists, class-maps and
+  # policy-maps)
+  - category:
+      name: standard
+      vlans: 3-101,122-190,220-250
+      per_flow_rate_bps: 100000
+
+  - category:
+      name: visitors
+      vlans: 102-121,191-200
+      per_flow_rate_bps: 80000
+
+  - category:
+      name: research
+      vlans: 201-219
+      per_flow_rate_bps: 200000
+
+l2_interface_queueing:
+  - category:
+      name: voice
+      ip_precedence: 5
+      queue_action: priority
+
+  - category:
+      name: network
+      ip_precedence: 6,7
+      queue_action: bandwidth remaining percent 5
+
+  - category:
+      name: important
+      ip_precedence: 1,2,4
+      queue_action: bandwidth remaining percent 50
+
+  - category:
+      name: video
+      ip_precedence: 3
+      queue_action: bandwidth remaining percent 10
+      
+  - category:
+      name: default
+      queue_action: bandwidth remaining percent 25

@@ -1,0 +1,6 @@
+---
+- name: distribution switches
+  gather_facts: no
+  hosts: localhost
+  roles:
+    - distribution_switches

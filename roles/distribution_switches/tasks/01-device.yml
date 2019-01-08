@@ -1,0 +1,9 @@
+---
+- include_vars:
+    file: '01-device-vars.yml'
+    
+- name: device configurations
+  template: src=device_configurations.j2 dest={{ cfg_dest }}
+  with_items:
+    "{{ devices }}"
+    

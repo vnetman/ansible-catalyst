@@ -1,0 +1,60 @@
+---
+- name: make config directories for devices
+  file:
+    path: dist-switches-cfg/{{ item.hostname }}
+    state: directory
+    mode: '0700'
+  with_items:
+    "{{ devices }}"
+
+- name: 01-device
+  import_tasks: 01-device.yml
+  vars:
+    cfg_dest: dist-switches-cfg/{{ item.hostname }}/01-device.cfg
+    
+- name: 02-logging
+  import_tasks: 02-logging.yml
+  vars:
+    cfg_dest: dist-switches-cfg/{{ item.hostname }}/02-logging.cfg
+    
+- name: 03-aaa
+  import_tasks: 03-aaa.yml
+  vars:
+    cfg_dest: dist-switches-cfg/{{ item.hostname }}/03-aaa.cfg
+    
+- name: 04-user-interface
+  import_tasks: 04-user-interface.yml
+  vars:
+    cfg_dest: dist-switches-cfg/{{ item.hostname }}/04-user-interface.cfg
+    
+- name: 05-layer-2
+  import_tasks: 05-layer-2.yml
+  vars:
+    cfg_dest: dist-switches-cfg/{{ item.hostname }}/05-layer-2.cfg
+    
+- name: 06-layer-3
+  import_tasks: 06-layer-3.yml
+  vars:
+    cfg_dest: dist-switches-cfg/{{ item.hostname }}/06-layer-3.cfg
+    
+- name: 07-netflow
+  import_tasks: 07-netflow.yml
+  vars:
+    cfg_dest: dist-switches-cfg/{{ item.hostname }}/07-netflow.cfg
+    
+- name: 08-qos
+  import_tasks: 08-qos.yml
+  vars:
+    cfg_dest: dist-switches-cfg/{{ item.hostname }}/08-qos.cfg
+    
+- name: assemble config file from fragments
+  assemble:
+    src: dist-switches-cfg/{{ item.hostname }}
+    regexp: '^\d{2}\-.+\.cfg$'
+    backup: yes
+    delimiter: '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
+    dest: dist-switches-cfg/{{ item.hostname }}/consolidated.cfg
+    mode: '0600'
+  with_items:
+    "{{ devices }}"
+    

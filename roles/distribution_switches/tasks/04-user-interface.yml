@@ -1,0 +1,12 @@
+---
+- include_vars:
+    file: 'secrets.yml'
+
+- include_vars:
+    file: '04-user-interface-vars.yml'
+    
+- name: User interface configurations
+  template: src=user_interface_configurations.j2 dest={{ cfg_dest }}
+  with_items:
+    "{{ devices }}"
+    

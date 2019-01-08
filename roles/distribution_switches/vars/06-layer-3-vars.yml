@@ -1,0 +1,102 @@
+---
+loopback_interfaces:
+  - hostname: nyc-bldg03-4th-floor
+    interfaces:
+      - number: 0
+        ipv4_address: 10.10.10.11
+        ospf: yes
+
+  - hostname: nyc-bldg03-3rd-floor
+    interfaces:
+      - number: 0
+        ipv4_address: 10.10.10.12
+        ospf: yes
+
+svis:
+  # The VLANs that we need SVIs for
+  vlans: 3-250
+  ipv4_subnet: 255.255.255.0
+  ipv4_network_wc: 0.0.0.255
+
+  # SVI IP addresses are 10.2.<vlan id>.253 and 10.2.<vlan id>.254
+  # for the 4th floor and 3rd floor distribution switches respectively.
+  ipv4_high_16: 10.2.
+  ipv4_low_8:
+    - hostname: nyc-bldg03-4th-floor
+      value: 253
+    - hostname: nyc-bldg03-3rd-floor
+      value: 254
+
+  hsrp:
+    # HSRP virtual IP address is 10.2.<vlan id>.1
+    ipv4_standby_low_8: 1
+
+    # SVI->HSRP group mappings. Vlan 3 is standby group 1, Vlan 4 is group 2,
+    # and so on.
+    vlans: 3-250
+    group_ids: 1-248
+
+    # For SVIs 3 through 127, the 4th floor switch has priority 100 and the
+    # 3rd floor switch has priority 200. For the remaining VLANs, the priorities
+    # are reversed between the two switches.
+    priority:
+      - hostname: nyc-bldg03-4th-floor
+        pset:
+          - vlans: 3-127
+            value: 100
+          - vlans: 128-250
+            value: 200
+      - hostname: nyc-bldg03-3rd-floor
+        pset:
+          - vlans: 3-127
+            value: 200
+          - vlans: 128-250
+            value: 100
+    
+# Layer-3 port channels
+l3_port_channels:
+  - hostname: nyc-bldg03-4th-floor
+    channels:
+      - pc_number: 63
+        description: Core uplink to nyc-bldg03-core-1
+        pc_mode: passive
+        ipv4_address: 10.3.0.2 255.255.255.252
+        ipv4_network: 10.3.0.0 0.0.0.3
+        members: 'Te3/1-2,Te4/1'
+        
+      - pc_number: 64
+        description: Core uplink to nyc-bldg03-core-2
+        pc_mode: passive
+        ipv4_address: 10.3.0.6 255.255.255.252
+        ipv4_network: 10.3.0.4 0.0.0.3
+        members: 'Te3/3,Te4/2-3'
+        
+      - pc_number: 62
+        description: East-West link to nyc-bldg03-3rd-floor
+        pc_mode: active
+        ipv4_address: 10.3.0.9 255.255.255.252
+        ipv4_network: 10.3.0.8 0.0.0.3
+        members: 'Te3/4,Te4/4'
+        
+  - hostname: nyc-bldg03-3rd-floor
+    channels:
+      - pc_number: 63
+        description: Core uplink to nyc-bldg03-core-1
+        pc_mode: passive
+        ipv4_address: 10.3.0.14 255.255.255.252
+        ipv4_network: 10.3.0.12 0.0.0.3
+        members: 'Te3/1-2,Te4/1'
+        
+      - pc_number: 64
+        description: Core uplink to nyc-bldg03-core-2
+        pc_mode: passive
+        ipv4_address: 10.3.0.18 255.255.255.252
+        ipv4_network: 10.3.0.16 0.0.0.3
+        members: 'Te3/3,Te4/2-3'
+        
+      - pc_number: 62
+        description: West-East link to nyc-bldg03-4th-floor
+        pc_mode: passive
+        ipv4_address: 10.3.0.10 255.255.255.252
+        ipv4_network: 10.3.0.8 0.0.0.3
+        members: 'Te3/4,Te4/4'

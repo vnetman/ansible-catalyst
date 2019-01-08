@@ -1,0 +1,32 @@
+---
+devices:
+  - hostname: nyc-bldg03-3rd-floor
+  - hostname: nyc-bldg03-4th-floor
+
+network_services:
+    syslog:
+      servers:
+        - ipv4_address: 10.1.0.6
+          
+    tacacs:
+      servers:
+        - ipv4_address: 10.1.0.4
+        - ipv4_address: 10.1.0.5
+
+    snmp_traps_and_informs:
+      servers:
+        - ipv4_address: 10.1.0.7
+        - ipv4_address: 10.1.0.8
+
+    dns:
+      servers:
+        - ipv4_address: 10.1.0.1
+        - ipv4_address: 10.1.0.2
+          
+    dhcp:
+      servers:
+        - ipv4_address: 10.1.0.9
+
+    netflow:
+      collectors:
+        - ipv4_address: 10.1.0.3

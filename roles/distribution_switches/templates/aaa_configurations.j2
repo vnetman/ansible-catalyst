@@ -1,0 +1,25 @@
+#jinja2:lstrip_blocks: True
+
+enable secret {{ secrets.enable }}
+
+{% for sd in secrets.direct %}
+username {{ sd.username }} secret {{ sd.password }}
+{% endfor %}
+
+{% for nts in network_services.tacacs.servers %}
+tacacs-server host {{ nts.ipv4_address }}
+{% endfor %}
+
+tacacs-server timeout {{ tacacs.timeout }}
+
+tacacs-server key {{ secrets.tacacs_key }}
+
+aaa new-model
+aaa authentication login default group tacacs+ enable
+aaa authentication enable default group tacacs+ enable
+aaa authorization config-commands
+aaa authorization commands 0 default group tacacs+ if-authenticated 
+aaa authorization commands 15 default group tacacs+ if-authenticated 
+aaa accounting update newinfo
+aaa accounting commands 15 default start-stop group tacacs+
+aaa session-id common

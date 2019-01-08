@@ -1,0 +1,39 @@
+#jinja2:lstrip_blocks: True
+
+line con 0
+ password {{ secrets.console }}
+ exec-timeout 20 0
+
+ip access-list standard allowed_ssh_accessors
+{% for ace in ssh.access_allowed_workstations %}
+ permit {{ ace.permit }}
+{% endfor %}
+
+line vty 0 4
+ access-class allowed_ssh_accessors in
+ exec-timeout 10 0
+ transport input ssh
+
+line vty 5 16
+ exec-timeout 10 0
+ transport input none
+
+{% for ace in snmp.access_allowed_workstations %}
+access-list 101 permit {{ ace.permit }}
+{% endfor %}
+
+snmp-server community {{ secrets.snmp_community_string }} RO 101
+snmp-server trap-source Loopback0
+
+snmp-server enable traps snmp linkdown linkup
+snmp-server enable traps ospf state-change
+snmp-server enable traps ospf errors
+snmp-server enable traps ospf retransmit
+snmp-server enable traps ospf lsa
+snmp-server enable traps bridge newroot topologychange
+snmp-server enable traps stpx inconsistency root-inconsistency loop-inconsistency
+{% for ss in network_services.snmp_traps_and_informs.servers %}
+snmp-server host {{ ss.ipv4_address }} {{ secrets.snmp_community_string }}
+{% endfor %}
+
+snmp ifmib ifindex persist

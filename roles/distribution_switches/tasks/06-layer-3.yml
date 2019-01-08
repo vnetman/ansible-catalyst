@@ -1,0 +1,14 @@
+---
+- include_vars:
+    file: '06-layer-3-vars.yml'
+
+# We need the layer-2 definitions as well, for getting the VLAN names
+# in the SVI descriptions
+- include_vars:
+    file: '05-layer-2-vars.yml'
+
+- name: Layer 3 configurations
+  template: src=layer_3_configurations.j2 dest={{ cfg_dest }}
+  with_items:
+    "{{ devices }}"
+    

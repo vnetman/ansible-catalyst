@@ -1,0 +1,3 @@
+---
+tacacs:
+  timeout: 10

@@ -1,0 +1,13 @@
+---
+ssh:
+  access_allowed_workstations:
+    - permit: 10.1.0.128 0.0.0.127
+    - permit: 10.1.0.12 0.0.0.0
+    - permit: 192.168.13.21 0.0.0.0
+      
+snmp:
+  access_allowed_workstations:
+    - permit: 10.1.0.192 0.0.0.63
+    - permit: 10.1.0.13 0.0.0.0
+    - permit: 192.168.13.21 0.0.0.0
+

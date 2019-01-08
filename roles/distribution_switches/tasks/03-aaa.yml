@@ -1,0 +1,12 @@
+---
+- include_vars:
+    file: 'secrets.yml'
+
+- include_vars:
+    file: '03-aaa-vars.yml'
+    
+- name: AAA configurations
+  template: src=aaa_configurations.j2 dest={{ cfg_dest }}
+  with_items:
+    "{{ devices }}"
+    

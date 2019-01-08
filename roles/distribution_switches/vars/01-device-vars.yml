@@ -1,0 +1,13 @@
+---
+software:
+  - hostname: (default)
+    images:
+    - file: bootflash:cat4500e-universalk9.SPA.03.06.02.E.152-2.E2.bin
+    - file: bootflash:cat4500e-universalk9.SPA.03.05.02.E.152-1.E2.bin
+
+    # Override the "(default)" setting above for hosts that need to run
+    # something different
+  - hostname: nyc-bldg03-4th-floor
+    images:
+    - file: bootdisk:s2t54-ipservicesk9-mz.SPA.151-2.SY4a.bin
+    - file: bootdisk:s2t54-ipservicesk9-mz.SPA.151-1.SY1.bin

@@ -1,0 +1,56 @@
+#jinja2:lstrip_blocks: True
+
+no ip device tracking
+
+udld aggressive
+udld message time 10
+
+{% for r in errdisable_recovery.reasons %}
+errdisable recovery cause {{ r.cause }}
+{% endfor %}
+errdisable recovery interval {{ errdisable_recovery.interval }}
+
+vtp domain {{ vtp.domain }}
+vtp mode {{ vtp.mode }}
+
+{% for vlan in vlan_definitions %}
+vlan {{ vlan.id }}
+ name {{ vlan.name }}
+{% endfor %}
+
+spanning-tree mode {{ spanning_tree.mode }}
+spanning-tree portfast bpduguard default
+no spanning-tree optimize bpdu transmission
+{% for phs in spanning_tree.per_host_settings %}
+  {% if phs.hostname == item.hostname %}
+    {% for vv in phs.priority %}
+spanning-tree vlan {{ vv.vlans }} priority {{ vv.value }}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+
+{% for hn in l2_port_channels %}
+  {% if hn.hostname == item.hostname %}
+    {% for channel in hn.channels %}
+interface Port-channel{{ channel.pc_number }}
+ description {{ channel.description }}
+ switchport
+      {% if channel.layer2_mode == 'trunk' %}
+ switchport trunk allowed vlan {{ channel.allowed_vlans }}
+      {% endif %}
+ switchport mode {{ channel.layer2_mode }}
+
+      {% for member in lookup('csrange', channel.members, wantlist=True) %}
+interface {{ member }}
+ description {{ channel.description }}
+ switchport
+	{% if channel.layer2_mode == 'trunk' %}
+ switchport trunk allowed vlan {{ channel.allowed_vlans }}
+	{% endif %}
+ switchport mode {{ channel.layer2_mode }}
+ channel-group {{ channel.pc_number }} mode {{ channel.pc_mode }}
+	
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}

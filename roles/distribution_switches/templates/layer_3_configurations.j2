@@ -1,0 +1,106 @@
+#jinja2:lstrip_blocks: True
+
+ip domain-list still.example.com
+!
+{% for dns_server in network_services.dns.servers %}
+ip name-server {{ dns_server.ipv4_address }}
+{% endfor %}
+!
+ip sla responder
+!
+interface FastEthernet1
+ no ip address
+!
+{% for svi_vlan_num in lookup('csrange', svis.vlans, wantlist=True) %}
+interface Vlan{{ svi_vlan_num }}
+  {% for l2vlandef in vlan_definitions %}
+    {% if l2vlandef.id|int == svi_vlan_num|int %}
+ description L3 gateway for {{ l2vlandef.name }} vlan
+    {% endif %}
+  {% endfor %}
+ no shutdown
+  {% for il8 in svis.ipv4_low_8 %}
+    {% if il8.hostname == item.hostname %}
+ ip address {{ svis.ipv4_high_16 }}{{ svi_vlan_num }}.{{ il8.value }} {{ svis.ipv4_subnet }}
+    {% endif %}
+  {% endfor %}
+  {% for dhcp_servers_sel in network_services.dhcp.servers %}
+ ip helper-address {{ dhcp_servers_sel.ipv4_address }}
+  {% endfor %}
+!
+{% endfor %}
+!
+{% for vlan_id, hsrp_group in lookup('csrange', svis.hsrp.vlans, wantlist=True)|zip(lookup('csrange', svis.hsrp.group_ids, wantlist=True)) %}
+interface Vlan{{ vlan_id }}
+ standby {{ hsrp_group }} ip {{ svis.ipv4_high_16 }}{{ vlan_id }}.{{ svis.hsrp.ipv4_standby_low_8 }}
+  {% for prio_sel in svis.hsrp.priority %}
+    {% if prio_sel.hostname == item.hostname %}
+      {% for pset_sel in prio_sel.pset %}
+	{% if vlan_id in lookup('csrange', pset_sel.vlans, wantlist=True) %}
+ standby {{ hsrp_group }} priority {{ pset_sel.value }}
+	{% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+ standby {{ hsrp_group }} preempt delay minimum 60
+!  
+{% endfor %}
+!
+{% for lo in loopback_interfaces %}
+  {% if lo.hostname == item.hostname %}
+    {% for lo_intf in lo.interfaces %}
+interface loopback{{ lo_intf.number }}
+ ip address {{ lo_intf.ipv4_address }} 255.255.255.255
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+!
+{% for hostname_sel in l3_port_channels %}
+  {% if hostname_sel.hostname == item.hostname %}
+    {% for channel_sel in hostname_sel.channels %}
+interface Port-channel{{ channel_sel.pc_number }}
+ description {{ channel_sel.description }}
+ no switchport
+ ip address {{ channel_sel.ipv4_address }}
+!
+      {% for member in lookup('csrange', channel_sel.members, wantlist=True) %}
+interface {{ member }}
+ description {{ channel_sel.description }}
+ no switchport
+ channel-group {{ channel_sel.pc_number }} mode {{ channel_sel.pc_mode }}
+!
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+{# OSPF #}
+{# The router id is the IP address of lo0 #}
+{# Add the networks for all the interfaces we configured above #}
+router ospf 100
+ log-adjacency-changes
+{% for lo in loopback_interfaces %}
+  {% if lo.hostname == item.hostname %}
+    {% for lo_intf in lo.interfaces %}
+      {% if lo_intf.number|int == 0 %}
+ router-id {{ lo_intf.ipv4_address }}
+ network {{ lo_intf.ipv4_address }} 0.0.0.0 area 0
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+{# Add the networks for the port-channels we configured above #}
+{% for hostname_sel in l3_port_channels %}
+  {% if hostname_sel.hostname == item.hostname %}
+    {% for channel_sel in hostname_sel.channels %}
+ network {{ channel_sel.ipv4_network }} area 0
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+{# Add the networks for all the SVIs we configured above #}
+{% for svi_vlan_num in lookup('csrange', svis.vlans, wantlist=True) %}
+ network {{ svis.ipv4_high_16 }}{{ svi_vlan_num }}.0 {{ svis.ipv4_network_wc }} area 0
+{% endfor %}
+{# Mark all SVIs as passive-interfaces #}
+{% for svi_vlan_num in lookup('csrange', svis.vlans, wantlist=True) %}
+ passive-interface Vlan{{ svi_vlan_num }}
+{% endfor %}

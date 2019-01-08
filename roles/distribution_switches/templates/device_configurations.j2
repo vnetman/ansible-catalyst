@@ -1,0 +1,34 @@
+#jinja2:lstrip_blocks: True
+
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+service compress-config
+
+hostname {{ item.hostname }}
+
+{#--- Template for boot system flash ... ---#}
+{% set specific_images = {'values': []} %}
+{% set default_images = {'values': []} %}
+
+{% for hn in software %}
+  {% if hn.hostname == item.hostname %}
+    {% set __u__ = specific_images.update({'values': hn.images}) %}
+  {% elif hn.hostname == '(default)' %}
+    {% set __u__ = default_images.update({'values': hn.images}) %}
+  {% endif %}
+{% endfor %}
+
+{% if specific_images['values']|length >=1 %}
+  {% for v in specific_images['values'] %}
+boot system flash {{ v['file'] }}
+  {% endfor %}
+{% else %}
+  {% for v in default_images['values'] %}
+boot system flash {{ v['file'] }}
+  {% endfor %}
+{% endif %}
+{#--- ---------------------------------- ---#}
+
+redundancy
+ mode sso

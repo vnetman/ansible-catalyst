@@ -1,0 +1,12 @@
+#jinja2:lstrip_blocks: True
+
+logging buffered 16384
+no logging console
+
+logging trap debugging
+logging source-interface Loopback0
+
+{% for si in network_services.syslog.servers %}
+logging host {{ si.ipv4_address }}
+{% endfor %}
+

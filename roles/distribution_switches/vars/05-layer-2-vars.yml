@@ -1,0 +1,1270 @@
+---
+errdisable_recovery:
+  reasons:
+    - cause: udld
+    - cause: dhcp-rate-limit
+    - cause: unicast-flood
+    - cause: storm-control
+  interval: 60
+
+spanning_tree:
+  mode: rapid-pvst
+  per_host_settings:
+    - hostname: nyc-bldg03-3rd-floor
+      priority:
+        - vlans: '3-126'
+          value: 4096
+        - vlans: '127-250'
+          value: 8192
+      
+    - hostname: nyc-bldg03-4th-floor
+      priority:
+        - vlans: '3-126'
+          value: 8192
+        - vlans: '127-250'
+          value: 4096
+
+vtp:
+  domain: example_vtp_domain
+  mode: transparent
+  
+# VLANs. Note that distribution switches carry all VLANs.
+
+vlan_definitions:
+  - id: 3
+    name: mulberry
+  - id: 4
+    name: verdigris
+  - id: 5
+    name: beaver
+  - id: 6
+    name: darkorange
+  - id: 7
+    name: icterine
+  - id: 8
+    name: beige
+  - id: 9
+    name: seagreen
+  - id: 10
+    name: rhythm
+  - id: 11
+    name: raspberry
+  - id: 12
+    name: lightgreen
+  - id: 13
+    name: dutchwhite
+  - id: 14
+    name: rosybrown
+  - id: 15
+    name: windsortan
+  - id: 16
+    name: mistyrose
+  - id: 17
+    name: lightseagreen
+  - id: 18
+    name: bananamania
+  - id: 19
+    name: blanchedalmond
+  - id: 20
+    name: wheat
+  - id: 21
+    name: mediumvioletred
+  - id: 22
+    name: uranianblue
+  - id: 23
+    name: dogwoodrose
+  - id: 24
+    name: blackchocolate
+  - id: 25
+    name: zomp
+  - id: 26
+    name: goldenrod
+  - id: 27
+    name: almond
+  - id: 28
+    name: springgreen
+  - id: 29
+    name: tan
+  - id: 30
+    name: brown
+  - id: 31
+    name: amber
+  - id: 32
+    name: puce
+  - id: 33
+    name: cornsilk
+  - id: 34
+    name: yellow
+  - id: 35
+    name: ecru
+  - id: 36
+    name: mediumspringgreen
+  - id: 37
+    name: ghostwhite
+  - id: 38
+    name: persimmon
+  - id: 39
+    name: kobe
+  - id: 40
+    name: newyorkpink
+  - id: 41
+    name: dodgerblue
+  - id: 42
+    name: periwinkle
+  - id: 43
+    name: smitten
+  - id: 44
+    name: lightsalmon
+  - id: 45
+    name: floralwhite
+  - id: 46
+    name: palevioletred
+  - id: 47
+    name: aliceblue
+  - id: 48
+    name: greenyellow
+  - id: 49
+    name: lollipop
+  - id: 50
+    name: auburn
+  - id: 51
+    name: marigold
+  - id: 52
+    name: dimgrey
+  - id: 53
+    name: babyblue
+  - id: 54
+    name: satinsheengold
+  - id: 55
+    name: yellowgreen
+  - id: 56
+    name: red
+  - id: 57
+    name: bisque
+  - id: 58
+    name: quicksilver
+  - id: 59
+    name: cadmiumyellow
+  - id: 60
+    name: lightyellow
+  - id: 61
+    name: iceberg
+  - id: 62
+    name: fandango
+  - id: 63
+    name: onyx
+  - id: 64
+    name: steelblue
+  - id: 65
+    name: dukeblue
+  - id: 66
+    name: thulianpink
+  - id: 67
+    name: absolutezero
+  - id: 68
+    name: antiquewhite
+  - id: 69
+    name: vermilion
+  - id: 70
+    name: magenta
+  - id: 71
+    name: liberty
+  - id: 72
+    name: saddlebrown
+  - id: 73
+    name: peachpuff
+  - id: 74
+    name: black
+  - id: 75
+    name: nadeshikopink
+  - id: 76
+    name: hickory
+  - id: 77
+    name: cambridgeblue
+  - id: 78
+    name: olive
+  - id: 79
+    name: sienna
+  - id: 80
+    name: catawba
+  - id: 81
+    name: deeppink
+  - id: 82
+    name: maroon
+  - id: 83
+    name: rosewood
+  - id: 84
+    name: sacramento
+  - id: 85
+    name: lightsteelblue
+  - id: 86
+    name: inchworm
+  - id: 87
+    name: veronica
+  - id: 88
+    name: pink
+  - id: 89
+    name: quinacridone
+  - id: 90
+    name: tangerine
+  - id: 91
+    name: kombugreen
+  - id: 92
+    name: mahogany
+  - id: 93
+    name: mediumturquoise
+  - id: 94
+    name: khaki
+  - id: 95
+    name: violetred
+  - id: 96
+    name: artichoke
+  - id: 97
+    name: gamboge
+  - id: 98
+    name: picoteeblue
+  - id: 99
+    name: atomictangerine
+  - id: 100
+    name: darkred
+  - id: 101
+    name: blueviolet
+  - id: 102
+    name: mediumorchid
+  - id: 103
+    name: drab
+  - id: 104
+    name: ebony
+  - id: 105
+    name: skyblue
+  - id: 106
+    name: lightcyan
+  - id: 107
+    name: orangered
+  - id: 108
+    name: darkcyan
+  - id: 109
+    name: wisteria
+  - id: 110
+    name: darkviolet
+  - id: 111
+    name: barnred
+  - id: 112
+    name: alabaster
+  - id: 113
+    name: grannysmithapple
+  - id: 114
+    name: tyrianpurple
+  - id: 115
+    name: oxblood
+  - id: 116
+    name: lightgoldenrodyellow
+  - id: 117
+    name: pearlriver
+  - id: 118
+    name: bloodred
+  - id: 119
+    name: mediumslateblue
+  - id: 120
+    name: plum
+  - id: 121
+    name: darkblue
+  - id: 122
+    name: blackshadows
+  - id: 123
+    name: queenblue
+  - id: 124
+    name: azure
+  - id: 125
+    name: cornflowerblue
+  - id: 126
+    name: harlequin
+  - id: 127
+    name: minionyellow
+  - id: 128
+    name: orchid
+  - id: 129
+    name: mediumaquamarine
+  - id: 130
+    name: rebeccapurple
+  - id: 131
+    name: ferngreen
+  - id: 132
+    name: jazzberryjam
+  - id: 133
+    name: zaffre
+  - id: 134
+    name: deepskyblue
+  - id: 135
+    name: ivory
+  - id: 136
+    name: darkmagenta
+  - id: 137
+    name: darkgreen
+  - id: 138
+    name: coral
+  - id: 139
+    name: apricot
+  - id: 140
+    name: junebud
+  - id: 141
+    name: darksalmon
+  - id: 142
+    name: blush
+  - id: 143
+    name: bistre
+  - id: 144
+    name: indianred
+  - id: 145
+    name: laserlemon
+  - id: 146
+    name: opal
+  - id: 147
+    name: slateblue
+  - id: 148
+    name: slategray
+  - id: 149
+    name: purple
+  - id: 150
+    name: viridian
+  - id: 151
+    name: lightskyblue
+  - id: 152
+    name: yellowsunshine
+  - id: 153
+    name: mediumpurple
+  - id: 154
+    name: lawngreen
+  - id: 155
+    name: battleship
+  - id: 156
+    name: cyan
+  - id: 157
+    name: lemonchiffon
+  - id: 158
+    name: livid
+  - id: 159
+    name: asparagus
+  - id: 160
+    name: sunglow
+  - id: 161
+    name: gunmetal
+  - id: 162
+    name: cultured
+  - id: 163
+    name: amethyst
+  - id: 164
+    name: linen
+  - id: 165
+    name: papayawhip
+  - id: 166
+    name: arcticlime
+  - id: 167
+    name: lavenderblush
+  - id: 168
+    name: gold
+  - id: 169
+    name: darkgrey
+  - id: 170
+    name: darkseagreen
+  - id: 171
+    name: eggplant
+  - id: 172
+    name: madderlake
+  - id: 173
+    name: gray
+  - id: 174
+    name: aureolin
+  - id: 175
+    name: earthyellow
+  - id: 176
+    name: darkslateblue
+  - id: 177
+    name: melancholy
+  - id: 178
+    name: jasmine
+  - id: 179
+    name: barbiepink
+  - id: 180
+    name: cinnabar
+  - id: 181
+    name: maize
+  - id: 182
+    name: wildstrawberry
+  - id: 183
+    name: aurometalsaurus
+  - id: 184
+    name: lightgoldenrod
+  - id: 185
+    name: hansayellow
+  - id: 186
+    name: lightslateblue
+  - id: 187
+    name: navajowhite
+  - id: 188
+    name: darkorchid
+  - id: 189
+    name: burlywood
+  - id: 190
+    name: carmine
+  - id: 191
+    name: chartreuse
+  - id: 192
+    name: moccasin
+  - id: 193
+    name: armygreen
+  - id: 194
+    name: tomato
+  - id: 195
+    name: fallow
+  - id: 196
+    name: mediumseagreen
+  - id: 197
+    name: firebrick
+  - id: 198
+    name: aqua
+  - id: 199
+    name: chocolate
+  - id: 200
+    name: blackcoral
+  - id: 201
+    name: skobeloff
+  - id: 202
+    name: blackolive
+  - id: 203
+    name: frostbite
+  - id: 204
+    name: fielddrab
+  - id: 205
+    name: mintcream
+  - id: 206
+    name: sandybrown
+  - id: 207
+    name: heliotrope
+  - id: 208
+    name: green
+  - id: 209
+    name: honolulublue
+  - id: 210
+    name: darkolivegreen
+  - id: 211
+    name: blackcoffee
+  - id: 212
+    name: darkgray
+  - id: 213
+    name: jade
+  - id: 214
+    name: lightblue
+  - id: 215
+    name: darkturquoise
+  - id: 216
+    name: bittersweet
+  - id: 217
+    name: gainsboro
+  - id: 218
+    name: feldgrau
+  - id: 219
+    name: hotpink
+  - id: 220
+    name: lightslategray
+  - id: 221
+    name: shamrockgreen
+  - id: 222
+    name: arylide
+  - id: 223
+    name: lapislazuli
+  - id: 224
+    name: byzantine
+  - id: 225
+    name: palegoldenrod
+  - id: 226
+    name: honeydew
+  - id: 227
+    name: aquamarine
+  - id: 228
+    name: lightpink
+  - id: 229
+    name: fawn
+  - id: 230
+    name: thistle
+  - id: 231
+    name: oldlace
+  - id: 232
+    name: paleturquoise
+  - id: 233
+    name: forestgreen
+  - id: 234
+    name: lightgrey
+  - id: 235
+    name: salmon
+  - id: 236
+    name: umber
+  - id: 237
+    name: powderblue
+  - id: 238
+    name: seashell
+  - id: 239
+    name: darkgoldenrod
+  - id: 240
+    name: navyblue
+  - id: 241
+    name: cadetblue
+  - id: 242
+    name: limegreen
+  - id: 243
+    name: royalblue
+  - id: 244
+    name: lightcoral
+  - id: 245
+    name: avocado
+  - id: 246
+    name: palegreen
+  - id: 247
+    name: darkkhaki
+  - id: 248
+    name: independence
+  - id: 249
+    name: mediumblue
+  - id: 250
+    name: whitesmoke
+
+# Layer-2 port channel downlinks to access layer
+l2_port_channels:
+  - hostname: nyc-bldg03-4th-floor
+    channels:
+      - pc_number: 1
+        description: acc-sw-tyk-04
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/1,Gi5/1'
+      - pc_number: 2
+        description: acc-sw-ztp-80
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/2,Gi5/2'
+      - pc_number: 3
+        description: acc-sw-wkx-14
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/3,Gi5/3'
+      - pc_number: 4
+        description: acc-sw-zae-49
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/4,Gi5/4'
+      - pc_number: 5
+        description: acc-sw-dej-74
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/5,Gi5/5'
+      - pc_number: 6
+        description: acc-sw-xwk-42
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/6,Gi5/6'
+      - pc_number: 7
+        description: acc-sw-ekp-47
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/7,Gi5/7'
+      - pc_number: 8
+        description: acc-sw-pcv-09
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/8,Gi5/8'
+      - pc_number: 9
+        description: acc-sw-qnb-14
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/9,Gi5/9'
+      - pc_number: 10
+        description: acc-sw-bin-50
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/10,Gi5/10'
+      - pc_number: 11
+        description: acc-sw-fan-45
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/11,Gi5/11'
+      - pc_number: 12
+        description: acc-sw-yjd-64
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/12,Gi5/12'
+      - pc_number: 13
+        description: acc-sw-ndx-52
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/13,Gi5/13'
+      - pc_number: 14
+        description: acc-sw-cmv-18
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/14,Gi5/14'
+      - pc_number: 15
+        description: acc-sw-rgh-80
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/15,Gi5/15'
+      - pc_number: 16
+        description: acc-sw-edo-35
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/16,Gi5/16'
+      - pc_number: 17
+        description: acc-sw-hwl-18
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/17,Gi5/17'
+      - pc_number: 18
+        description: acc-sw-adm-40
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/18,Gi5/18'
+      - pc_number: 19
+        description: acc-sw-arb-86
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/19,Gi5/19'
+      - pc_number: 20
+        description: acc-sw-xbh-21
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/20,Gi5/20'
+      - pc_number: 21
+        description: acc-sw-aid-62
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/21,Gi5/21'
+      - pc_number: 22
+        description: acc-sw-ujv-60
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/22,Gi5/22'
+      - pc_number: 23
+        description: acc-sw-yvl-02
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/23,Gi5/23'
+      - pc_number: 24
+        description: acc-sw-tmc-79
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/24,Gi5/24'
+      - pc_number: 25
+        description: acc-sw-zas-19
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/25,Gi5/25'
+      - pc_number: 26
+        description: acc-sw-dhe-27
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/26,Gi5/26'
+      - pc_number: 27
+        description: acc-sw-mik-40
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/27,Gi5/27'
+      - pc_number: 28
+        description: acc-sw-lfm-43
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/28,Gi5/28'
+      - pc_number: 29
+        description: acc-sw-eqz-10
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/29,Gi5/29'
+      - pc_number: 30
+        description: acc-sw-ctj-12
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/30,Gi5/30'
+      - pc_number: 31
+        description: acc-sw-ubz-64
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/31,Gi5/31'
+      - pc_number: 32
+        description: acc-sw-kco-38
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/48,Gi6/48'
+      - pc_number: 33
+        description: acc-sw-nhp-50
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/47,Gi6/47'
+      - pc_number: 34
+        description: acc-sw-hsk-30
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/46,Gi6/46'
+      - pc_number: 35
+        description: acc-sw-rpq-01
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/45,Gi6/45'
+      - pc_number: 36
+        description: acc-sw-dlb-14
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/44,Gi6/44'
+      - pc_number: 37
+        description: acc-sw-kcd-53
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/43,Gi6/43'
+      - pc_number: 38
+        description: acc-sw-bxl-76
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/42,Gi6/42'
+      - pc_number: 39
+        description: acc-sw-ykp-50
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/41,Gi6/41'
+      - pc_number: 40
+        description: acc-sw-iel-18
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/40,Gi6/40'
+      - pc_number: 41
+        description: acc-sw-sih-50
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/39,Gi6/39'
+      - pc_number: 42
+        description: acc-sw-nzb-61
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/38,Gi6/38'
+      - pc_number: 43
+        description: acc-sw-sfh-83
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/37,Gi6/37'
+      - pc_number: 44
+        description: acc-sw-qyj-73
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/36,Gi6/36'
+      - pc_number: 45
+        description: acc-sw-pyt-51
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/35,Gi6/35'
+      - pc_number: 46
+        description: acc-sw-rzo-80
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/34,Gi6/34'
+      - pc_number: 47
+        description: acc-sw-ohu-26
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/33,Gi6/33'
+      - pc_number: 48
+        description: acc-sw-ugl-48
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/32,Gi6/32'
+      - pc_number: 49
+        description: acc-sw-rbc-39
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/31,Gi6/31'
+      - pc_number: 50
+        description: acc-sw-cgd-06
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/30,Gi6/30'
+      - pc_number: 51
+        description: acc-sw-efj-39
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/29,Gi6/29'
+      - pc_number: 52
+        description: acc-sw-frk-13
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/28,Gi6/28'
+      - pc_number: 53
+        description: acc-sw-nch-76
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/27,Gi6/27'
+      - pc_number: 54
+        description: acc-sw-uyd-17
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/26,Gi6/26'
+      - pc_number: 55
+        description: acc-sw-qxl-35
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/25,Gi6/25'
+      - pc_number: 56
+        description: acc-sw-vkd-93
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/24,Gi6/24'
+      - pc_number: 57
+        description: acc-sw-fya-23
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/23,Gi6/23'
+      - pc_number: 58
+        description: acc-sw-shr-47
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/22,Gi6/22'
+      - pc_number: 59
+        description: acc-sw-nrw-57
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/21,Gi6/21'
+      - pc_number: 60
+        description: acc-sw-qkj-43
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/20,Gi6/20'
+      - pc_number: 61
+        description: acc-sw-hzx-95
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/19,Gi6/19'
+        
+  - hostname: nyc-bldg03-3rd-floor
+    channels:
+      - pc_number: 1
+        description: acc-sw-tyk-04
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/1,Gi5/1'
+      - pc_number: 2
+        description: acc-sw-ztp-80
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/2,Gi5/2'
+      - pc_number: 3
+        description: acc-sw-wkx-14
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/3,Gi5/3'
+      - pc_number: 4
+        description: acc-sw-zae-49
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/4,Gi5/4'
+      - pc_number: 5
+        description: acc-sw-dej-74
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/5,Gi5/5'
+      - pc_number: 6
+        description: acc-sw-xwk-42
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/6,Gi5/6'
+      - pc_number: 7
+        description: acc-sw-ekp-47
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/7,Gi5/7'
+      - pc_number: 8
+        description: acc-sw-pcv-09
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/8,Gi5/8'
+      - pc_number: 9
+        description: acc-sw-qnb-14
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/9,Gi5/9'
+      - pc_number: 10
+        description: acc-sw-bin-50
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/10,Gi5/10'
+      - pc_number: 11
+        description: acc-sw-fan-45
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/11,Gi5/11'
+      - pc_number: 12
+        description: acc-sw-yjd-64
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/12,Gi5/12'
+      - pc_number: 13
+        description: acc-sw-ndx-52
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/13,Gi5/13'
+      - pc_number: 14
+        description: acc-sw-cmv-18
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/14,Gi5/14'
+      - pc_number: 15
+        description: acc-sw-rgh-80
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/15,Gi5/15'
+      - pc_number: 16
+        description: acc-sw-edo-35
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/16,Gi5/16'
+      - pc_number: 17
+        description: acc-sw-hwl-18
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/17,Gi5/17'
+      - pc_number: 18
+        description: acc-sw-adm-40
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/18,Gi5/18'
+      - pc_number: 19
+        description: acc-sw-arb-86
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/19,Gi5/19'
+      - pc_number: 20
+        description: acc-sw-xbh-21
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/20,Gi5/20'
+      - pc_number: 21
+        description: acc-sw-aid-62
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/21,Gi5/21'
+      - pc_number: 22
+        description: acc-sw-ujv-60
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/22,Gi5/22'
+      - pc_number: 23
+        description: acc-sw-yvl-02
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/23,Gi5/23'
+      - pc_number: 24
+        description: acc-sw-tmc-79
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/24,Gi5/24'
+      - pc_number: 25
+        description: acc-sw-zas-19
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/25,Gi5/25'
+      - pc_number: 26
+        description: acc-sw-dhe-27
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/26,Gi5/26'
+      - pc_number: 27
+        description: acc-sw-mik-40
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/27,Gi5/27'
+      - pc_number: 28
+        description: acc-sw-lfm-43
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/28,Gi5/28'
+      - pc_number: 29
+        description: acc-sw-eqz-10
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/29,Gi5/29'
+      - pc_number: 30
+        description: acc-sw-ctj-12
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/30,Gi5/30'
+      - pc_number: 31
+        description: acc-sw-ubz-64
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi1/31,Gi5/31'
+      - pc_number: 32
+        description: acc-sw-kco-38
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/48,Gi6/48'
+      - pc_number: 33
+        description: acc-sw-nhp-50
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/47,Gi6/47'
+      - pc_number: 34
+        description: acc-sw-hsk-30
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/46,Gi6/46'
+      - pc_number: 35
+        description: acc-sw-rpq-01
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/45,Gi6/45'
+      - pc_number: 36
+        description: acc-sw-dlb-14
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/44,Gi6/44'
+      - pc_number: 37
+        description: acc-sw-kcd-53
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/43,Gi6/43'
+      - pc_number: 38
+        description: acc-sw-bxl-76
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/42,Gi6/42'
+      - pc_number: 39
+        description: acc-sw-ykp-50
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/41,Gi6/41'
+      - pc_number: 40
+        description: acc-sw-iel-18
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/40,Gi6/40'
+      - pc_number: 41
+        description: acc-sw-sih-50
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/39,Gi6/39'
+      - pc_number: 42
+        description: acc-sw-nzb-61
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/38,Gi6/38'
+      - pc_number: 43
+        description: acc-sw-sfh-83
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/37,Gi6/37'
+      - pc_number: 44
+        description: acc-sw-qyj-73
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/36,Gi6/36'
+      - pc_number: 45
+        description: acc-sw-pyt-51
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/35,Gi6/35'
+      - pc_number: 46
+        description: acc-sw-rzo-80
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/34,Gi6/34'
+      - pc_number: 47
+        description: acc-sw-ohu-26
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/33,Gi6/33'
+      - pc_number: 48
+        description: acc-sw-ugl-48
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/32,Gi6/32'
+      - pc_number: 49
+        description: acc-sw-rbc-39
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/31,Gi6/31'
+      - pc_number: 50
+        description: acc-sw-cgd-06
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/30,Gi6/30'
+      - pc_number: 51
+        description: acc-sw-efj-39
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/29,Gi6/29'
+      - pc_number: 52
+        description: acc-sw-frk-13
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/28,Gi6/28'
+      - pc_number: 53
+        description: acc-sw-nch-76
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/27,Gi6/27'
+      - pc_number: 54
+        description: acc-sw-uyd-17
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/26,Gi6/26'
+      - pc_number: 55
+        description: acc-sw-qxl-35
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/25,Gi6/25'
+      - pc_number: 56
+        description: acc-sw-vkd-93
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/24,Gi6/24'
+      - pc_number: 57
+        description: acc-sw-fya-23
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/23,Gi6/23'
+      - pc_number: 58
+        description: acc-sw-shr-47
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/22,Gi6/22'
+      - pc_number: 59
+        description: acc-sw-nrw-57
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/21,Gi6/21'
+      - pc_number: 60
+        description: acc-sw-qkj-43
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/20,Gi6/20'
+      - pc_number: 61
+        description: acc-sw-hzx-95
+        pc_mode: active
+        layer2_mode: trunk
+        allowed_vlans: '3-250'
+        members: 'Gi2/19,Gi6/19'
+
